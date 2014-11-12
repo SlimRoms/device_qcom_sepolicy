@@ -34,3 +34,13 @@ unix_socket_connect(mediaserver, mpctl, perfd)
 
 # for thermal sock files
 unix_socket_connect(mediaserver, thermal, thermal-engine)
+
+# Allow mediaserver to search and get the widevine, playready firmwares
+allow mediaserver firmware_file:dir search;
+allow mediaserver firmware_file:file { read getattr open };
+
+#access to audio
+userdebug_or_eng('
+allow mediaserver debugfs:file rw_file_perms;
+')
+
