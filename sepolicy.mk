@@ -5,3 +5,5 @@ BOARD_SEPOLICY_DIRS := \
        device/qcom/sepolicy/common \
        device/qcom/sepolicy/test \
        device/qcom/sepolicy/$(TARGET_BOARD_PLATFORM)
+
+-include vendor/slim/sepolicy/qcom/sepolicy.mk
