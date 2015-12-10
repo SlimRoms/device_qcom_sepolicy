@@ -38,3 +38,14 @@ unix_socket_connect(perfd, thermal, thermal-engine);
 
 # Access device nodes inside /dev/cpuctl
 allow perfd cpuctl_device:chr_file rw_file_perms;
+
+# Allow perfd to send signull
+allow perfd {
+    system_server
+    system_app
+    wfdservice
+    mediaserver
+    thermal-engine
+    surfaceflinger
+    appdomain
+}:process signull;
