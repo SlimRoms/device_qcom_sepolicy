@@ -29,6 +29,7 @@
 /dev/block/bootdevice/by-name/m9kefs1           u:object_r:efs_boot_dev:s0
 /dev/block/bootdevice/by-name/m9kefs2           u:object_r:efs_boot_dev:s0
 /dev/block/bootdevice/by-name/m9kefs3           u:object_r:efs_boot_dev:s0
+/dev/block/bootdevice/by-name/m9kefsc           u:object_r:efs_boot_dev:s0
 /dev/gss                                        u:object_r:gss_device:s0
 /dev/pps[0-9]                                   u:object_r:gss_device:s0
 /dev/socket/mpdecision                          u:object_r:mpdecision_socket:s0
