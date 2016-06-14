@@ -94,8 +94,8 @@ userdebug_or_eng(`
 	allow RIDL self:packet_socket create_socket_perms;
 	allow RIDL self:capability net_raw;
 
-        # allow location
-        allow RIDL app_api_service:service_manager find;
+    # allow location
+    allow RIDL app_api_service:service_manager find;
 ')
 
 # drop root caps
