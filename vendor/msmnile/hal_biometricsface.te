@@ -1,4 +1,4 @@
-# Copyright (c) 2018, The Linux Foundation. All rights reserved.
+# Copyright (c) 2018-2019, The Linux Foundation. All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are
@@ -25,41 +25,45 @@
 # OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN
 # IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-type vendor_scve, domain;
-type vendor_scve_exec, exec_type, vendor_file_type, file_type;
+type vendor_biometricsface, domain;
+type vendor_biometricsface_exec, exec_type, vendor_file_type, file_type;
 
-init_daemon_domain(vendor_scve)
+init_daemon_domain(vendor_biometricsface)
 
-hal_server_domain(vendor_scve, hal_scve)
+hal_server_domain(vendor_biometricsface, hal_biometricsface)
 
-add_hwservice(hal_scve_server, hal_scve_hwservice)
+add_hwservice(hal_biometricsface_server, hal_biometricsface_hwservice)
 
-allow hal_scve_client hal_scve_hwservice:hwservice_manager find;
+allow hal_biometricsface_client hal_biometricsface_hwservice:hwservice_manager find;
 
-binder_call(hal_scve_client, hal_scve_server)
-binder_call(hal_scve_server, hal_scve_client)
+binder_call(hal_biometricsface_client, hal_biometricsface_server)
+binder_call(hal_biometricsface_server, hal_biometricsface_client)
 
-r_dir_file(vendor_scve, adsprpcd_file)
+r_dir_file(vendor_biometricsface, adsprpcd_file)
 
-#  Access for ion memory
-allow vendor_scve ion_device:chr_file rw_file_perms;
+#  Access for ion_memory
+allow vendor_biometricsface ion_device:chr_file rw_file_perms;
 
-#  Access for  DSP/QDSP device
-allow vendor_scve qdsp_device:chr_file rw_file_perms;
-allow vendor_scve dsp_device:chr_file rw_file_perms;
+#  Access for qseecom_memory
+allow vendor_biometricsface tee_device:chr_file rw_file_perms;
 
-#  Access for adsprpc_prop
-get_prop(vendor_scve, adsprpc_prop)
-
-#  Access for GPU
-allow vendor_scve gpu_device:chr_file rw_file_perms;
+#  Access for DSP/QDSP device
+allow vendor_biometricsface qdsp_device:chr_file rw_file_perms;
+allow vendor_biometricsface dsp_device:chr_file rw_file_perms;
 
 #  Access for sdcard
 userdebug_or_eng(`
-allow vendor_scve sdcard_type:dir rw_dir_perms;
-allow vendor_scve sdcard_type:file create_file_perms;
+allow vendor_biometricsface sdcard_type:dir rw_dir_perms;
+allow vendor_biometricsface sdcard_type:file create_file_perms;
 ')
 
-#  Access for /data/vendor/scve
-allow vendor_scve vendor_scve_data_file:dir create_dir_perms;
-allow vendor_scve vendor_scve_data_file:file create_file_perms;
+#Access for graphics buffer
+hal_client_domain(vendor_biometricsface, hal_graphics_allocator);
+
+#  Access for /data/vendor/misc/face3d_dir
+allow vendor_biometricsface vendor_biometricsface_data_file:dir create_dir_perms;
+allow vendor_biometricsface vendor_biometricsface_data_file:file create_file_perms;
+
+# Allow to read persist.biometrics.face3d.producer,adsprpc prop
+get_prop(vendor_biometricsface, face3d_producer_prop);
+get_prop(vendor_biometricsface, adsprpc_prop);
