@@ -16,7 +16,7 @@ ifneq (,$(filter $(UM_4_14_FAMILY), $(TARGET_BOARD_PLATFORM)))
         device/qcom/sepolicy/generic/vendor/common \
         device/qcom/sepolicy/qva/vendor/common/sysmonapp \
         device/qcom/sepolicy/qva/vendor/ssg \
-        device/qcom/sepolicy/generic/vendor/timeservice \
+        device/qcom/sepolicy/timeservice \
         device/qcom/sepolicy/qva/vendor/common
 
     ifeq ($(TARGET_SEPOLICY_DIR),)
@@ -35,7 +35,7 @@ else
     BOARD_SEPOLICY_DIRS += \
         device/qcom/sepolicy/legacy/vendor/common/sysmonapp \
         device/qcom/sepolicy/legacy/vendor/ssg \
-        device/qcom/sepolicy/legacy/vendor/timeservice \
+        device/qcom/sepolicy/timeservice \
         device/qcom/sepolicy/legacy/vendor/common
 
     ifeq ($(TARGET_SEPOLICY_DIR),)
