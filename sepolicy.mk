@@ -48,4 +48,4 @@ else
     endif
 endif
 
--include device/gzosp/sepolicy/qcom/sepolicy.mk
+-include device/slim/sepolicy/qcom/sepolicy.mk
